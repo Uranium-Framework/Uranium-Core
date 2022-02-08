@@ -1,1 +1,7 @@
-
+[
+    {
+        "Version": "1.0.0stable",
+        "Build": "Luna",
+        "State": "Alpha"
+    }
+]
