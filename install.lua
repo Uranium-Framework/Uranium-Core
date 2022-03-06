@@ -7,4 +7,4 @@ local Replicate = game:GetService("ReplicatedStorage")
 local psScript = Instance.new("Script", game:GetService("ServerScriptService"))
 local expan = Instance.new("Folder", psScript)
 local setting = Instance.new("ModuleScript", psScript)
-setting.source = "Hi"
+setting.Source = "Hi"
