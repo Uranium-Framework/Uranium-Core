@@ -16,6 +16,12 @@ local function isInstalled()
 	end
 end
 
+--################ Structuring ################
+local function createSpace()
+	print("Sunrise: Beginning to structure the Sunrise workspace please wait...")
+	local mainScript = Instance.new("Script", ServerScript)
+	mainScript.Name = "ProjectSunrise"
+end
 
 --################ Executer ################
 local function exe()
@@ -24,6 +30,7 @@ local function exe()
 		warn("Sunrise: You already have Project Sunrise installed! This can be found in", location.Parent)
 	elseif hasInstalled == "toinstall" then
 		print("Sunrise: Initilazing install...")
+		
 	end
 end
 exe()
