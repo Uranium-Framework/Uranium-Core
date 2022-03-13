@@ -1,10 +1,29 @@
+--################ Variables ################
+
 local HttpService = game:GetService("HttpService")
-local Replicate = game:GetService("ReplicatedStorage")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerScript = game:GetService("ServerScriptService")
+
+--################ Code ################
+
+local function isInstalled()
+	for i, v in pairs(ServerScript:GetChildren()) do
+		if v:GetAttribute("Sunrise") or v.Name == "Project Sunrise" then
+			return "installed", v
+		else
+			return "toinstall"
+		end
+	end
+end
 
 
---################ Structuring ################--
-
-local psScript = Instance.new("Script", game:GetService("ServerScriptService"))
-local expan = Instance.new("Folder", psScript)
-local setting = Instance.new("ModuleScript", psScript)
-setting.Source = "Hi"
+--################ Executer ################
+local function exe()
+	local hasInstalled, location = isInstalled()
+	if hasInstalled == "installed" then
+		warn("Sunrise: You already have Project Sunrise installed! This can be found in", location.Parent)
+	elseif hasInstalled == "toinstall" then
+		print("Sunrise: Initilazing install...")
+	end
+end
+exe()
