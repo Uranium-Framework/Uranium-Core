@@ -30,7 +30,7 @@ local function exe()
 		warn("Sunrise: You already have Project Sunrise installed! This can be found in", location.Parent)
 	elseif hasInstalled == "toinstall" then
 		print("Sunrise: Initilazing install...")
-		
+		createSpace()
 	end
 end
 exe()
