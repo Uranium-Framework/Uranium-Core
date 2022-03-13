@@ -9,6 +9,9 @@ local ServerScript = game:GetService("ServerScriptService")
 local function isInstalled()
 	for _, v in pairs(ServerScript:GetChildren()) do
 		print(v)
+		if v.Name == "ProjectSunrise" or v:GetAttribute("Sunrise") then
+			return "installed"
+		end
 	end
 end
 
@@ -21,10 +24,10 @@ end
 
 --################ Executer ################
 local function exe()
-	local hasInstalled, location = isInstalled()
+	local hasInstalled = isInstalled()
 	if hasInstalled == "installed" then
-		warn("Sunrise: You already have Project Sunrise installed! This can be found in", location.Parent)
-	elseif hasInstalled == "toinstall" then
+		warn("Sunrise: You already have Project Sunrise installed! This can be found in, ServerScriptService!")
+	elseif hasInstalled ~= "installed" then
 		print("Sunrise: Initilazing install...")
 		createSpace()
 	end
