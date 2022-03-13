@@ -14,7 +14,7 @@ local function isInstalled()
 end
 
 --################ Creator ################
-local function createSpace()
+function createSpace()
 	print("Sunrise Installer: Beginning to structure the Sunrise workspace please wait...")
 	print("Sunrise Installer: Adding the main script")
 	local mainScript = Instance.new("Script", game:GetService("ServerScriptService")) 
@@ -64,7 +64,7 @@ local function createSpace()
 	print("Sunrise Installer: Adding the ClientHandler script")
 	local ClientHandScript = Instance.new("LocalScript", loaderScript)
 	ClientHandScript.Name = "ClientHandler"
-	ClientHandScript.Source = HttpService:GetAsync("https://github.com/SyntalDev/Project-Sunrise/blob/main/src/ClientHandler.lua")
+	ClientHandScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/ClientHandler.lua")
 	task.wait(0.2)
 	
 	print("Sunrise Installer: Adding the SunriseAPI Shared script")
@@ -74,11 +74,42 @@ local function createSpace()
 	task.wait(0.2)
 	
 	print("Sunrise Installer: Completed the structure of the Sunrise workspace, now adding the System files")
-	addSystemFiles()
+	addSystemFiles(systemFolder)
 end
 
-function addSystemFiles()
-	print("Add lol")
+function addSystemFiles(system)
+	task.wait(0.2)
+	
+	print("Sunrise Installer: Adding the GetVersion script")
+	local GetVer = Instance.new("ModuleScript", system)
+	GetVer.Name = "GetVer"
+	GetVer.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/GetVer.lua")
+	task.wait(0.2)
+	
+	print("Sunrise Installer: Adding the KnitLoader script")
+	local KnitLoaderScript = Instance.new("ModuleScript", system)
+	KnitLoaderScript.Name = "KnitLoader"
+	KnitLoaderScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/KnitLoader.lua")
+	task.wait(0.2)
+	
+	print("Sunrise Installer: Adding the ServerUtil script")
+	local Serverutil = Instance.new("ModuleScript", system)
+	Serverutil.Name = "ServerUtil"
+	Serverutil.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/ServerUtil.lua")
+	task.wait(0.2)
+	
+	print("Sunrise Installer: Adding the SunriseAPI script", system)
+	local SunriseAPI = Instance.new("ModuleScript", system)
+	SunriseAPI.Name = "SunriseAPI"
+	SunriseAPI.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/SunriseAPI.lua")
+	
+	print("Sunrise Installer: Completed the system installation, now adding all of the Libraries")
+end
+
+function addLibraries()
+	task.wait(0.2)
+	
+	
 end
 
 --################ Executer ################
