@@ -1,25 +1,28 @@
+
 --################ Variables ################
 
 local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local ServerScript = game:GetService("ServerScriptService")
 
 --################ Code ################
 
 local function isInstalled()
-	for i, v in pairs(ServerScript:GetChildren()) do
-		if v:GetAttribute("Sunrise") or v.Name == "ProjectSunrise" then
-			return "installed", v
-		else
-			return "toinstall"
+	while true do
+		for i, v in pairs(game.ServerScriptService:GetDescendants()) do
+			if v:GetAttribute("Sunrise") or v.Name == "ProjectSunrise" then
+				return "installed", v
+			else
+				return "toinstall"
+			end
 		end
+		break
 	end
 end
 
 --################ Structuring ################
 local function createSpace()
 	print("Sunrise: Beginning to structure the Sunrise workspace please wait...")
-	local mainScript = Instance.new("Script", ServerScript)
+	local mainScript = Instance.new("Script", game:GetService("ServerScriptService"))
 	mainScript.Name = "ProjectSunrise"
 end
 
