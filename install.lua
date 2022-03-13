@@ -4,8 +4,7 @@ local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScript = game:GetService("ServerScriptService")
 
---################ Code ################
-
+--################ Installed check ################
 local function isInstalled()
 	for _, v in pairs(ServerScript:GetChildren()) do
 		if v.Name == "ProjectSunrise" or v:GetAttribute("Sunrise") then
@@ -14,11 +13,13 @@ local function isInstalled()
 	end
 end
 
---################ Structuring ################
+--################ Creator ################
 local function createSpace()
 	print("Sunrise: Beginning to structure the Sunrise workspace please wait...")
 	local mainScript = Instance.new("Script", game:GetService("ServerScriptService"))
 	mainScript.Name = "ProjectSunrise"
+	mainScript:SetAttribute("string", "Sunrise")
+	mainScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/ProjectSunrise.lua")
 end
 
 --################ Executer ################
