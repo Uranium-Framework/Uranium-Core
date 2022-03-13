@@ -8,7 +8,7 @@ local ServerScript = game:GetService("ServerScriptService")
 
 local function isInstalled()
 	for i, v in pairs(ServerScript:GetChildren()) do
-		if v:GetAttribute("Sunrise") or v.Name == "Project Sunrise" then
+		if v:GetAttribute("Sunrise") or v.Name == "ProjectSunrise" then
 			return "installed", v
 		else
 			return "toinstall"
