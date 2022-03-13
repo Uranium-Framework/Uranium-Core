@@ -1,21 +1,14 @@
-
 --################ Variables ################
 
 local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerScript = game:GetService("ServerScriptService")
 
 --################ Code ################
 
 local function isInstalled()
-	while true do
-		for i, v in pairs(game.ServerScriptService:GetDescendants()) do
-			if v:GetAttribute("Sunrise") or v.Name == "ProjectSunrise" then
-				return "installed", v
-			else
-				return "toinstall"
-			end
-		end
-		break
+	for _, v in pairs(ServerScript:GetChildren()) do
+		print(v)
 	end
 end
 
