@@ -3,6 +3,7 @@
 local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScript = game:GetService("ServerScriptService")
+local AssetInsert = game:GetService("InsertService")
 
 --################ Installed check ################
 local function isInstalled()
@@ -21,7 +22,7 @@ function createSpace()
 	mainScript.Name = "ProjectSunrise"
 	mainScript:SetAttribute("string", "Sunrise")
 	mainScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/ProjectSunrise.lua")
-	task.wait(1)
+	task.wait(0.2)
 
 	print("Sunrise Installer: Adding the Expansion folder")
 	local expansionsFolder = Instance.new("Folder", mainScript) 
@@ -106,8 +107,9 @@ function addSystemFiles(system)
 	print("Sunrise Installer: Completed the system installation, now adding all of the Libraries")
 end
 
-function addLibraries()
-
+function addLibraries(libFolder)
+	local libs = AssetInsert:LoadAsset(9118715085)
+	print(libs:GetChildren())
 end
 
 --################ Executer ################
