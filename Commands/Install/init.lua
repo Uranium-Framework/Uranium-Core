@@ -15,18 +15,16 @@ end
 
 --################ Creator ################
 function createSpace()
-
-	addSystemFiles(systemFolder)
+	loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/Commands/Install/coreSpaceInstall.lua"))
 end
 
 function addSystemFiles(system)
-    
+print("Hi!", system.Name)
 end
 
 function addLibraries()
-	task.wait(0.2)
-	
-	
+
+
 end
 
 --################ Executer ################
