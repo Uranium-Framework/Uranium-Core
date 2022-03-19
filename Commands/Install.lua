@@ -21,7 +21,7 @@ function createSpace()
 	mainScript.Name = "ProjectSunrise"
 	mainScript:SetAttribute("string", "Sunrise")
 	mainScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/ProjectSunrise.lua")
-	task.wait(0.2)
+	task.wait(1)
 
 	print("Sunrise Installer: Adding the Expansion folder")
 	local expansionsFolder = Instance.new("Folder", mainScript) 
@@ -78,7 +78,7 @@ function createSpace()
 end
 
 function addSystemFiles(system)
-	task.wait(0.2)
+	task.wait(1)
 
 	print("Sunrise Installer: Adding the GetVersion script")
 	local GetVer = Instance.new("ModuleScript", system)
@@ -107,7 +107,6 @@ function addSystemFiles(system)
 end
 
 function addLibraries()
-
 
 end
 
