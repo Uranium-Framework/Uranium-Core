@@ -57,3 +57,4 @@ SharedAPIScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com
 task.wait(0.2)
 
 print("Sunrise Installer: Completed the structure of the Sunrise workspace, now adding the System files")
+addSystemFiles(systemFolder)
