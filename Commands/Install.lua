@@ -132,9 +132,8 @@ function addLibraries(libFolder)
 	for _, lib in pairs(libraries) do
 		local index = table.find(downloadedLibs, lib)
 		
-		if index then
-			table.remove(downloadedLibs, index)
-		end
+		table.remove(downloadedLibs, index)
+		
 	end
 	task.wait(2)
 	if #downloadedLibs ~= 0 then
