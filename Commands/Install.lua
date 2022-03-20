@@ -22,7 +22,7 @@ function createSpace()
 	mainScript.Name = "ProjectSunrise"
 	mainScript:SetAttribute("string", "Sunrise")
 	mainScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/ProjectSunrise.lua")
-	task.wait(1)
+	task.wait(0.2)
 
 	print("Sunrise Installer: Adding the Expansion folder")
 	local expansionsFolder = Instance.new("Folder", mainScript) 
@@ -111,14 +111,14 @@ function addLibraries(libFolder)
 	local temp = Instance.new("Folder", workspace)
 	local libs = AssetInsert:LoadAsset(9118715085)
 	local folder = libs:FindFirstChild("SunriseLibs")
+	local libsDownloaded = 0
 	
 	for name, library in pairs(folder:GetChildren()) do
 		library.Parent = temp
+		libsDownloaded += 1
 	end
 	
-	
-	
-	
+	print(libsDownloaded)
 end
 
 --################ Executer ################
