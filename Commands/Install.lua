@@ -118,7 +118,7 @@ function addLibraries(libFolder)
 		table.insert(downloadedLibs, library.Name)
 	end
 	
-	for _, lib in pairs(HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/librariesList.lua")) do
+	for _, lib in pairs(table.pack(HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/librariesList.lua"))) do
 		print(lib)
 	end
 	
