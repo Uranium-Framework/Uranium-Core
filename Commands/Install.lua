@@ -124,13 +124,14 @@ function addLibraries(libFolder)
 	local folder = libs:FindFirstChild("Libraries")
 	local downloadedLibs = {}
 	
-	for name, library in pairs(folder:GetChildren()) do
+	for _, library in pairs(folder:GetChildren()) do
 		library.Parent = temp
 		table.insert(downloadedLibs, library)
+		print(library)
 	end
 	
-	for _, lib in pairs(libraries) do
-		local index = table.find(downloadedLibs, lib)
+	for _, lib in pairs(downloadedLibs) do
+		local index = table.find(libraries, lib)
 		table.remove(downloadedLibs, index)
 	end
 	task.wait(2)
@@ -155,3 +156,4 @@ local function exe()
 	end
 end
 exe()
+
