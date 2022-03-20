@@ -115,7 +115,7 @@ function addLibraries(libFolder)
 	
 	for name, library in pairs(folder:GetChildren()) do
 		library.Parent = temp
-		table.insert(downloadedLibs, name)
+		table.insert(downloadedLibs, library.Name)
 	end
 	
 	for _, v in pairs(downloadedLibs) do
