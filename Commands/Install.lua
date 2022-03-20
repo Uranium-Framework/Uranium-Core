@@ -22,7 +22,7 @@ function createSpace()
 	mainScript.Name = "ProjectSunrise"
 	mainScript:SetAttribute("string", "Sunrise")
 	mainScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/ProjectSunrise.lua")
-	task.wait(0.2)
+	task.wait(1)
 
 	print("Sunrise Installer: Adding the Expansion folder")
 	local expansionsFolder = Instance.new("Folder", mainScript) 
