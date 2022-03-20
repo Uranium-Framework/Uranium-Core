@@ -126,17 +126,17 @@ function addLibraries(libFolder)
 	
 	for name, library in pairs(folder:GetChildren()) do
 		library.Parent = temp
-		table.insert(downloadedLibs, library.Name)
+		table.insert(downloadedLibs, library)
 	end
 	
 	for _, lib in pairs(libraries) do
 		local index = table.find(downloadedLibs, lib)
-		
 		table.remove(downloadedLibs, index)
-		
 	end
 	task.wait(2)
-	if #downloadedLibs ~= 0 then
+	if #downloadedLibs == 0 then
+		print("Sunrise Installer: Completed Library insertion")
+	else
 		warn("Sunrise Installer: The following libraries were not installed, please contact the developers about this issue!")
 		for _, v in pairs(downloadedLibs) do
 			print(v)
