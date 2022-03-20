@@ -30,8 +30,7 @@ function createSpace()
 	task.wait(0.2)
 
 	print("Sunrise Installer: Adding the Credits script")
-	local creditsScript = Instance.new("ModuleScript", mainScript) 
-	creditsScript.Name = "Credits"
+	local creditsScript = Instance.new("ModuleScript", mainScript) 	creditsScript.Name = "Credits"
 	creditsScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/credits.lua")
 	task.wait(0.2)
 
@@ -75,10 +74,10 @@ function createSpace()
 	task.wait(0.2)
 
 	print("Sunrise Installer: Completed the structure of the Sunrise workspace, now adding the System files")
-	addSystemFiles(systemFolder, libFolder)
+	addSystemFiles(systemFolder)
 end
 
-function addSystemFiles(system, libfolder)
+function addSystemFiles(system)
 	task.wait(1)
 
 	print("Sunrise Installer: Adding the GetVersion script")
@@ -105,12 +104,16 @@ function addSystemFiles(system, libfolder)
 	SunriseAPI.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/SunriseAPI.lua")
 
 	print("Sunrise Installer: Completed the system installation, now adding all of the Libraries")
-	addLibraries(libfolder)
 end
 
 function addLibraries(libFolder)
+	local temp = Instance.new("Folder", workspace)
 	local libs = AssetInsert:LoadAsset(9118715085)
-	print(libs:GetChildren())
+	print(typeof(libs))
+	
+	
+	
+	
 end
 
 --################ Executer ################
