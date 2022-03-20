@@ -74,10 +74,10 @@ function createSpace()
 	task.wait(0.2)
 
 	print("Sunrise Installer: Completed the structure of the Sunrise workspace, now adding the System files")
-	addSystemFiles(systemFolder)
+	addSystemFiles(systemFolder, libFolder)
 end
 
-function addSystemFiles(system)
+function addSystemFiles(system, libfolder)
 	task.wait(1)
 
 	print("Sunrise Installer: Adding the GetVersion script")
@@ -104,6 +104,7 @@ function addSystemFiles(system)
 	SunriseAPI.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/SunriseAPI.lua")
 
 	print("Sunrise Installer: Completed the system installation, now adding all of the Libraries")
+	addLibraries(libfolder)
 end
 
 function addLibraries(libFolder)
