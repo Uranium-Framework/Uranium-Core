@@ -4,6 +4,17 @@ local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScript = game:GetService("ServerScriptService")
 local AssetInsert = game:GetService("InsertService")
+local libraries = {
+	"Knit",
+	"ReplicaService",
+	"Bezier",
+	"BoatTween",
+	"ProfileService",
+	"Promise",
+	"Roact",
+	"ScreenMouseHints",
+	"TopBarPlusV2"
+}
 
 --################ Installed check ################
 local function isInstalled()
@@ -118,8 +129,10 @@ function addLibraries(libFolder)
 		table.insert(downloadedLibs, library.Name)
 	end
 	
-	for _, lib in pairs(table.pack(HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/librariesList.lua"))) do
-		print(lib)
+	for _, lib in pairs(libraries) do
+		if table.find(downloadedLibs, lib) then
+			table.remove(downloadedLibs, lib)
+		end
 	end
 	
 end
