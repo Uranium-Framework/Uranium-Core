@@ -122,27 +122,75 @@ function addLibraries(libFolder)
 	local temp = Instance.new("Folder", workspace)
 	local libs = AssetInsert:LoadAsset(9118715085)
 	local folder = libs:FindFirstChild("Libraries")
-	local downloadedLibs = {}
+	local installedLibs = {}
 	
 	for _, library in pairs(folder:GetChildren()) do
 		library.Parent = temp
-		table.insert(downloadedLibs, library)
-		print(library)
+		table.insert(installedLibs, library)
 	end
 	
-	for _, lib in pairs(downloadedLibs) do
-		local index = table.find(libraries, lib)
-		table.remove(downloadedLibs, index)
-	end
-	task.wait(2)
-	if #downloadedLibs == 0 then
-		print("Sunrise Installer: Completed Library insertion")
+	if #installedLibs < #libraries then
+		warn("Sunrise Installer: Some libraries were not installed, the following tables will show which libraries were ment to be installed and which were installed!\Please contact the developers and show them this issue!")
+		print("Sunrise Installer: Library list", libraries)
+		print("Sunrise Installer: Installed libraries", installedLibs)
 	else
-		warn("Sunrise Installer: The following libraries were not installed, please contact the developers about this issue!")
-		for _, v in pairs(downloadedLibs) do
-			print(v)
+		for _, v in pairs(temp:GetChildren()) do 
+			v.Parent = libFolder
+			print("Sunrise Installer: Comepleted the installation of the libraries now adding the extras!")
+			installExtras()
 		end
 	end
+end
+
+function installExtras()
+	--################ Asset Holder ################
+	task.wait(1)
+	print("Sunrise Installer: Adding the AssetHolder")
+	local mainFolder = Instance.new("Folder", ReplicatedStorage)
+	mainFolder.Name = "SunriseAssetHolder"
+	
+	task.wait(0.2)
+	print("Sunrise Installer: Adding the Animations folder")
+	local animFolder = Instance.new("Folder", mainFolder)
+	animFolder.Name = "Animations"
+	
+	task.wait(0.2)
+	print("Sunrise Installer: Adding the AssetContainment folder")
+	local containmentFolder = Instance.new("Folder", mainFolder)
+	containmentFolder.Name = "AssetContainment"
+	
+	task.wait(0.2)
+	print("Sunrise Installer: Adding the Meshes/Parts")
+	local meshFolder = Instance.new("Folder", mainFolder)
+	meshFolder.Name = "Meshes/Parts"
+	
+	task.wait(0.2)
+	print("Sunrise Installer: Adding the Packages folder")
+	local packagesFolder = Instance.new("Folder", mainFolder)
+	packagesFolder.Name = "Packages"
+	
+	task.wait(0.2)
+	print("Sunrise Installer: Adding the Particles folder")
+	local particleFolder = Instance.new("Folder", mainFolder)
+	particleFolder.Name = "Particles"
+	
+	task.wait(0.2)
+	print("Sunrise Installer: Adding the sounds folder")
+	local soundsFolder = Instance.new("Folder", mainFolder)
+	soundsFolder.Name = "Sounds"
+	
+	task.wait(0.2)
+	print("Sunrise Installer: Adding the StartUpScreen folder")
+	local startupFolder = Instance.new("Folder", mainFolder)
+	startupFolder.Name = "StartUpScreen"
+	
+	--################ Sunrise Start Up ################
+	task.wait(0.2)
+	print("Sunrise Installer: Adding the SunriseStartUp script")
+	local startScript = Instance.new("LocalScript", game:GetService("ReplicatedFirst"))
+	startScript.Name = "SunriseStartUp"
+	startScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/SunriseStartUp.lua")
+	
 end
 
 --################ Executer ################
@@ -153,6 +201,8 @@ local function exe()
 	elseif hasInstalled ~= "installed" then
 		print("Sunrise Installer: Initilazing install...")
 		createSpace()
+		task.wait(5)
+		print("Sunrise Installer: Successfully installed the Sunrise Framework!")
 	end
 end
 exe()
