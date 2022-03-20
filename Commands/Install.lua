@@ -134,13 +134,12 @@ function addLibraries(libFolder)
 		
 		if index then
 			table.remove(downloadedLibs, index)
-			table.remove(libraries, index)
 		end
 	end
 	task.wait(2)
-	if #libraries ~= 0 then
+	if #downloadedLibs ~= 0 then
 		warn("Sunrise Installer: The following libraries were not installed, please contact the developers about this issue!")
-		for _, v in pairs(libraries) do
+		for _, v in pairs(downloadedLibs) do
 			print(v)
 		end
 	end
