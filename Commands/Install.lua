@@ -129,8 +129,8 @@ function addLibraries(libFolder)
 		table.insert(downloadedLibs, library.Name)
 	end
 	
-	for _, lib in pairs(downloadedLibs) do
-		local index = table.find(libraries, lib)
+	for _, lib in pairs(libraries) do
+		local index = table.find(downloadedLibs, lib)
 		
 		if index then
 			table.remove(downloadedLibs, index)
