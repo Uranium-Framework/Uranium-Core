@@ -138,8 +138,9 @@ function addLibraries(libFolder)
 		for _, v in pairs(temp:GetChildren()) do 
 			v.Parent = libFolder
 			print("Sunrise Installer: Comepleted the installation of the libraries now adding the extras!")
-			installExtras()
+			
 		end
+		installExtras()
 	end
 end
 
