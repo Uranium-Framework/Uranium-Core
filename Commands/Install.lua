@@ -15,6 +15,7 @@ local libraries = {
 	"ScreenMouseHints",
 	"TopBarPlusV2"
 }
+local complete = false
 
 --################ Installed check ################
 local function isInstalled()
@@ -190,7 +191,7 @@ function installExtras()
 	local startScript = Instance.new("LocalScript", game:GetService("ReplicatedFirst"))
 	startScript.Name = "SunriseStartUp"
 	startScript.Source = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/src/SunriseStartUp.lua")
-	
+	complete = true
 end
 
 --################ Executer ################
@@ -201,9 +202,14 @@ local function exe()
 	elseif hasInstalled ~= "installed" then
 		print("Sunrise Installer: Initilazing install...")
 		createSpace()
-		task.wait(5)
-		print("Sunrise Installer: Successfully installed the Sunrise Framework!")
+		task.wait(7)
+		if complete == true then 
+			warn("Sunrise Installer: Successfully installed the Sunrise Framework!")
+		else
+			warn("Sunrise Installer: Something has gone wrong in the installation process! Try again or contact the developer. Alternatively choose a different installation method!")
+		end
 	end
 end
 exe()
+
 
