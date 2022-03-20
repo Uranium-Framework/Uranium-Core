@@ -111,7 +111,6 @@ function addLibraries(libFolder)
 	local temp = Instance.new("Folder", workspace)
 	local libs = AssetInsert:LoadAsset(9118715085)
 	local folder = libs:FindFirstChild("SunriseLibs")
-	local libList = HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/librariesList.lua")
 	local downloadedLibs = {}
 	
 	for name, library in pairs(folder:GetChildren()) do
@@ -119,7 +118,7 @@ function addLibraries(libFolder)
 		table.insert(downloadedLibs, library.Name)
 	end
 	
-	for _, lib in pairs(libList) do
+	for _, lib in pairs(HttpService:GetAsync("https://raw.githubusercontent.com/SyntalDev/Project-Sunrise/main/librariesList.lua")) do
 		print(lib)
 	end
 	
