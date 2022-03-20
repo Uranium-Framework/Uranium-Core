@@ -121,7 +121,7 @@ end
 function addLibraries(libFolder)
 	local temp = Instance.new("Folder", workspace)
 	local libs = AssetInsert:LoadAsset(9118715085)
-	local folder = libs:FindFirstChild("SunriseLibs")
+	local folder = libs:FindFirstChild("Libraries")
 	local downloadedLibs = {}
 	
 	for name, library in pairs(folder:GetChildren()) do
