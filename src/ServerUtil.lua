@@ -1,7 +1,7 @@
 local util = {}
 
 function util.Get(packageName:string)
-	local Packages = game:GetService("ReplicatedStorage"):FindFirstChild("Packages")
+	local Packages = game:GetService("ReplicatedStorage"):FindFirstChild("SunriseAssetHolder").Packages
 	local ServerPackages = game:GetService("ServerScriptService"):FindFirstChild("Packages")
 	
 	if ServerPackages:FindFirstChild(packageName) and ServerPackages:FindFirstChild(packageName):IsA("ModuleScript") then

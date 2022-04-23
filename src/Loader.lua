@@ -1,17 +1,17 @@
---[[
-8888888b.                   d8b                   888          .d8888b.                            d8b                   
-888   Y88b                  Y8P                   888         d88P  Y88b                           Y8P                   
-888    888                                        888         Y88b.                                                      
-888   d88P 888d888 .d88b.  8888  .d88b.   .d8888b 888888       "Y888b.   888  888 88888b.  888d888 888 .d8888b   .d88b.  
-8888888P"  888P"  d88""88b "888 d8P  Y8b d88P"    888             "Y88b. 888  888 888 "88b 888P"   888 88K      d8P  Y8b 
-888        888    888  888  888 88888888 888      888               "888 888  888 888  888 888     888 "Y8888b. 88888888 
-888        888    Y88..88P  888 Y8b.     Y88b.    Y88b.       Y88b  d88P Y88b 888 888  888 888     888      X88 Y8b.     
-888        888     "Y88P"   888  "Y8888   "Y8888P  "Y888       "Y8888P"   "Y88888 888  888 888     888  88888P'  "Y8888  
-                            888                                                                                          
-                           d88P                                                                                          
-                         888P"                                                                                           
---]]
+
 return function(Expansions, Settings)
+	
+	local BuiltInLibsShared = {
+		Roact = true,
+		Bezier = true,
+		BoatTween = true,
+		Icon = true,
+		Promise = true,
+	}
+	
+	local BuiltInLibsServer = {
+		ProfileService = true
+	}
 	
 	if require(Settings).isUsingKnit then
 		print("using knit!")
@@ -20,7 +20,23 @@ return function(Expansions, Settings)
 		Instance.new("Folder", game:GetService("ReplicatedStorage")).Name = "Packages"
 	end
 	
+	for lib, v in pairs(BuiltInLibsShared) do
+		if script.Libraries:FindFirstChild(lib) then
+			local module:ModuleScript = script.Libraries:FindFirstChild(lib)
+			module:Clone().Parent = game:GetService("ReplicatedStorage"):FindFirstChild("SunriseAssetHolder").Packages
+		end
+	end
+		
 	Instance.new("Folder", game:GetService("ServerScriptService")).Name = "Packages"
+	
+	for lib, v in pairs(BuiltInLibsServer) do
+		if script.Libraries:FindFirstChild(lib) then
+			local module:ModuleScript = script.Libraries:FindFirstChild(lib)
+			module:Clone().Parent = game:GetService("ServerScriptService"):WaitForChild("Packages")
+		end
+	end
+	
+	Instance.new("Folder", game:GetService("ReplicatedStorage")).Name = "A_R"
 	
 	local serverUtil = script.System.ServerUtil:Clone()
 	serverUtil.Name = "Util"
@@ -46,7 +62,7 @@ return function(Expansions, Settings)
 	
 	local folder4 = Instance.new("Folder")
 	folder4.Name = "SunriseShared"
-	folder4.Parent = game:GetService("ReplicatedStorage")
+	folder4.Parent = game:GetService("Workspace")
 	
 	
 	warn("Sunrise: Initializing...")
@@ -57,7 +73,13 @@ return function(Expansions, Settings)
 	task.spawn(function()
 		Expansions.Name = "Custom"
 		Expansions.Parent = script["Built-In"]
-		script["SunriseAPI (Shared)"].Parent = folder4
+		script["SharedSunriseAPI"].Parent = folder4
+		script.Libraries.ReplicaService.ReplicaService.Parent = script.Libraries 
+		for _, v in pairs(script.Libraries.ReplicaService.ReplicatedStorage:GetChildren()) do
+			v.Parent = game:GetService("ReplicatedStorage")
+		end
+		script.Libraries.ReplicaService:Destroy()
+		script.Libraries.Icon.Parent = game:GetService("ReplicatedStorage"):WaitForChild("Packages")
 	end)
 
 	
@@ -111,7 +133,7 @@ return function(Expansions, Settings)
 		for extend, value in pairs(require(script.Parent.Settings).Extends) do
 			if value then
 				local newEX = script.Libraries:FindFirstChild(extend):Clone()
-				newEX.Parent = game:GetService("ReplicatedStorage"):WaitForChild("Packages")
+				newEX.Parent = game:GetService("ReplicatedStorage"):WaitForChild("SunriseAssetHolder"):WaitForChild("Packages")
 			else
 				local newEX = script.Libraries:FindFirstChild(extend):Clone()
 				newEX.Parent = game:GetService("ServerScriptService"):WaitForChild("Packages")
@@ -123,24 +145,17 @@ return function(Expansions, Settings)
 	
 	--################ Custom loader ################--
 	function loadCustom(v:ModuleScript?) --Loads the custom modules if they are on the server or both!
-		
 		local mod
 		if require(v).Path == "Server" then
-			
 			mod = v:Clone()
 			mod.Parent = folder2
-			
 			require(mod).Util = require(serverUtil)
-			
 		elseif require(v).Path == "Both" then
-	
 			mod = v:Clone()
 			mod.Parent = folder1
 		end
-		
 		mod = require(mod)
 		mod.API = require(script.System.SunriseAPI)
-		
 		for expanding, value in pairs(mod.Extends) do
 			if value and expanding ~= "Knit" and expanding ~= "ReplicaService" then
 				local newUtil = game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild(expanding, 3)
@@ -152,7 +167,6 @@ return function(Expansions, Settings)
 
 			end
 		end
-		
 		mod:Execute()
 	end
 	--################ Shared API ################--
@@ -179,7 +193,10 @@ return function(Expansions, Settings)
 				local clientHandler = script.ClientHandler:Clone()
 				clientHandler.Parent = plr:WaitForChild("PlayerGui"):WaitForChild("SunriseClient")
 				clientHandler.Disabled = false
+				warn("Sunrise: System is fully loaded!")
 			end
 		end)
 	end)	
 end
+
+

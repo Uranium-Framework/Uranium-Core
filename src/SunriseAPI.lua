@@ -1,46 +1,135 @@
---[[
-8888888b.                   d8b                   888          .d8888b.                            d8b                   
-888   Y88b                  Y8P                   888         d88P  Y88b                           Y8P                   
-888    888                                        888         Y88b.                                                      
-888   d88P 888d888 .d88b.  8888  .d88b.   .d8888b 888888       "Y888b.   888  888 88888b.  888d888 888 .d8888b   .d88b.  
-8888888P"  888P"  d88""88b "888 d8P  Y8b d88P"    888             "Y88b. 888  888 888 "88b 888P"   888 88K      d8P  Y8b 
-888        888    888  888  888 88888888 888      888               "888 888  888 888  888 888     888 "Y8888b. 88888888 
-888        888    Y88..88P  888 Y8b.     Y88b.    Y88b.       Y88b  d88P Y88b 888 888  888 888     888      X88 Y8b.     
-888        888     "Y88P"   888  "Y8888   "Y8888P  "Y888       "Y8888P"   "Y88888 888  888 888     888  88888P'  "Y8888  
-                            888                                                                                          
-                           d88P                                                                                          
-                         888P"                                                                                           
---]]
 local API = {}
 API.__index = API
 
 --################ Variables ################--
-API.Shared = {} --These functions are shared between the server and the client, these are however only recommended for client use only
 API.Replica = {} --All functions for Replica Service
-API.ProfileService = {}
-API.Hints = {}
-API.TopBar = {}
-API.Roact = {}
-API.Tween = {}
-API.Shared.Bezier = {}
+API.ProfileService = {} --All functions for Profile Service
+API.PathFinder = {} --All functions for Pathfinder
+API.Remote = require(script.Parent.Remote)
+local ScriptContext = game:GetService("ScriptContext")
+
+type Array<t> = {[number]:t} -- Array variable type
+type Dictionary<t> = {[string]:t} -- Dictionary variable type
+
+local Util = require(script.Util)
+
+--################ Main API  ################--
+
+
+--################ Replica ################--
+
+function API.Replica.NewState(ReplicaData:Dictionary<any>)
+	assert(ReplicaData, "Sunrise | Replica: No ReplicaData was found!");
+	local Replica = game:GetService("ServerScriptService").ProjectSunrise.Loader.Libraries.ProfileService;
+	local  class,tags, data , replication ,parent =  ReplicaData.ClassToken,ReplicaData.Tags, ReplicaData.Data ,ReplicaData.Replications,ReplicaData.Parent;
+	
+	--creates the replica
+	local replica = Replica.NewReplica({
+		ClassToken = Replica.NewClassToken(class),
+		Tags = tags, 
+		Data = data, 
+		Replication = replication, 
+		Parent = parent});
+	return replica
+end;
+
+function API:ChangeReplicaValue()
+	print(self.replica.Data)
+end;
+
+API.Replica.__index = API.Replica;
+
+--################ Profile Service ################--
+
+API.ProfileService.StartData = function(data: {}, onLoaded, onRelease)
+	local ProfileService = CoreAPI.GetLibraryWithUtil("ProfileService")
+	local Players = game:GetService("Players")
+
+	local ProfileStore = ProfileService.GetProfileStore(
+		"PlayerData",
+		data
+	)
+
+	local Profiles = {} -- [player] = profile
+
+	----- Private Functions -----
+
+	local function PlayerAdded(player)
+		local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId)
+		if profile ~= nil then
+			profile:AddUserId(player.UserId) -- GDPR compliance
+			profile:Reconcile() -- Fill in missing variables from ProfileTemplate (optional)
+			profile:ListenToRelease(function()
+				Profiles[player] = nil
+				-- The profile could've been loaded on another Roblox server:
+				player:Kick()
+			end)
+			if player:IsDescendantOf(Players) == true then
+				Profiles[player] = profile
+				-- A profile has been successfully loaded:
+				onLoaded(player, profile)
+			else
+				-- Player left before the profile loaded:
+				profile:Release()
+			end
+		else
+			-- The profile couldn't be loaded possibly due to other
+			--   Roblox servers trying to load this profile at the same time:
+			player:Kick() 
+		end
+	end
+
+	----- Initialize -----
+
+	-- In case Players have joined the server earlier than this script ran:
+	for _, player in ipairs(Players:GetPlayers()) do
+		task.spawn(PlayerAdded, player)
+	end
+
+	----- Connections -----
+
+	Players.PlayerAdded:Connect(PlayerAdded)
+
+	Players.PlayerRemoving:Connect(function(player)
+		local profile = Profiles[player]
+		if profile ~= nil then
+			onRelease(player, profile)
+			profile:Release()
+		end
+	end)
+	
+	local self2 = {}
+	
+	function self2.GetProfile(player)
+		if player~=player.ClassName then
+			player = game:GetService("Players"):FindFirstChild(player)			
+		end
+		return Profiles[player]
+	end
+	
+	return self2
+end
 
 
 
 --################ CoreAPI ################--
 CoreAPI = setmetatable({
+	GetLibraryWithUtil = function(name)
+		return Util.Get(name);
+	end,
+	GetOtherLibrary = function(location, name)
+		return require(location:FindFirstChild(name))
+	end,
 	
-	
-	
-	
-	
-	
-	
-	
-	}, {
+}, {
 	__metatable = "Sunrise: Table is locked!",
-	__newindex = function() error("Sunrise: This table cannot accept new values!") end
+	__newindex = function() error("Sunrise: This table cannot accept new values!") end,
+	__call = function() error("Sunrise: Cannot call values from the CoreAPI!") end,
+	
 })
 
+rawset(_G, "SunriseCoreAPI", CoreAPI)
+return API
 
 
 

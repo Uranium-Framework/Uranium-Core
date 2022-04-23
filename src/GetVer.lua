@@ -1,6 +1,6 @@
 local HttpService = game:GetService("HttpService")
 local Promise = require(script.Parent.Parent.Libraries.Promise)
-local currentVer = "1.0.0unstable"
+local currentVer = "1.0.0-alpha.1"
 local currentBuild = "Luna"
 
 
@@ -20,14 +20,11 @@ return function(plr)
 	local status, response = fetch():await()
 	if status then
 		for _, v in pairs(response) do
-			if v.Version ~= currentVer or v.Build ~= currentBuild then
+			if v.Version ~= currentVer or v.Build ~= currentBuild and v.Major then
 				local newVersion = tostring(v.Version)
 				local newBuild = tostring(v.Build)
 				_G.LVersion = newVersion
 				warn("OUT OF DATE PLEASE UPDATE TO", v.Version, "BUILD", v.Build)
-				if v.Major == "Y" then
-					plr:Kick("\nPLEASE UPDATE SUNRISE TO THE LATEST VERSION!".."\nLatest Version: "..newVersion.."\nLatest Build: "..newBuild.."\nCurrent Version: "..currentVer.."\nCurrent Build: "..currentBuild)
-				end
 			else
 				return v.Version, v.Build, currentVer
 			end

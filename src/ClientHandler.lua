@@ -13,7 +13,9 @@ for _, src in pairs(game:GetService("Players").LocalPlayer:WaitForChild("PlayerG
 				
 			end
 		end
-		module.API = game.Workspace:WaitForChild("SunriseShared", 3):WaitForChild("SunriseAPI (Shared)", 3)
+		module.API = require(workspace:WaitForChild("SunriseShared", 3):WaitForChild("SharedSunriseAPI", 3)).API
+		
+		module.API.Remote = require(script.Remote)
 		
 		module:Execute()	
 	end
