@@ -9,5 +9,9 @@ Most of the API is made with future updates thus the function might seem very cl
 
 
 # Requirements
-
+| Name                | Required | Description                                                                                                                                                                                                              |
+|---------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Scripting knowledge | Yes      | While sunrise can handle lot of hard to understand concepts, you still need to know at least the basic of luau which shouldn't be a big surprise,  it is also recommended to know a  bit of Object Oriented Programming! |
+| Rojo                | No       | [Rojo](https://rojo.space/docs/v6/) is a powerful tool which allows you to sync your roblox code into Visual Studio code or any other IDE, it is up to your preference however it is recommended to use it.              |
+| Selene              | No       | Selene is a lint                                                                                                                                                                                                         |
 
