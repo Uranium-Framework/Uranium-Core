@@ -1,6 +1,6 @@
 # Sunrise Framework
 
-Sunrise Framework is a new powerful framework for Roblox development.
+Sunrise Framework is a new powerful framework for easier Roblox development.
 
 Sunrise's main purpose is to make development easier for new developers, we try to achieve this by making as easy to understand API as possible. Sunrise uses many great libraries as well as [Knit](https://github.com/Sleitnick/Knit) to seamlessly bridge the gap between the server and the client. 
 
