@@ -15,9 +15,14 @@ Most of the API is made with future updates thus the function might seem very cl
 | Rojo                | No       | [Rojo](https://rojo.space/docs/v6/) is a powerful tool which allows you to sync your roblox code into Visual Studio code or any other IDE, it is up to your preference however it is recommended to use it.                                   |
 | Selene              | No       | [Selene](https://kampfkarren.github.io/selene/selene.html) is a [linter](https://en.wikipedia.org/wiki/Lint_(software)) it is recommended to use this if you are using Rojo as it picks up many errors and can be configured to your liking!  |
 
-# Documentation
+# Full Documentation
 
-Any sor of documentation can be found on our [site](https://syntaldev.github.io/site/)
+Any sort of documentation can be found on our [site](https://syntaldev.github.io/site/)
 
-There will also be a video series coming with the full release of v1.0.0!
+if you wish to read the doc on your phone you can simply scan this QR code!
 
+![frame](https://user-images.githubusercontent.com/99213873/166800265-05f1d2d7-bfe4-4c71-a029-41c1fe00fc70.png)
+
+# Video Documentation
+
+There will be a video series made by me released with the full release of the framework(v1.0.0)
