@@ -10,7 +10,4 @@ Most of the API is made with future updates thus the function might seem very cl
 
 # Requirements
 
-| Name               |Required   | Description   |    
-| :---               |    :----: |          ---: |
-| Scripting knowledge| Basic Knowledge   | While Sunrise can handle alot of harder to understand concepts you still need to know the basics of luau!  |
-| Paragraph          | Text      | And more      |
+
