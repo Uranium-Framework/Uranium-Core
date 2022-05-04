@@ -10,7 +10,7 @@ Most of the API is made with future updates thus the function might seem very cl
 
 # Requirements
 
-| Name        |Description| Required      
-| :---        |    :----: |          ---: |
-| VSC         |           | Here's this   |
-| Paragraph   | Text      | And more      |
+| Name               |Required   | Description   |    
+| :---               |    :----: |          ---: |
+| Scripting knowledge| Minimal   | Here's this   |
+| Paragraph          | Text      | And more      |
