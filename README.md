@@ -12,5 +12,5 @@ Most of the API is made with future updates thus the function might seem very cl
 
 | Name               |Required   | Description   |    
 | :---               |    :----: |          ---: |
-| Scripting knowledge| Minimal   | Here's this   |
+| Scripting knowledge| Basic Knowledge   | While Sunrise can handle alot of harder to understand concepts you still need to know the basics of luau!  |
 | Paragraph          | Text      | And more      |
