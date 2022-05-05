@@ -11,33 +11,10 @@ local ScriptContext = game:GetService("ScriptContext")
 type Array<t> = {[number]:t} -- Array variable type
 type Dictionary<t> = {[string]:t} -- Dictionary variable type
 
-local Util = require(script.Util)
 
 --################ Main API  ################--
 
 
---################ Replica ################--
-
-function API.Replica.NewState(ReplicaData:Dictionary<any>)
-	assert(ReplicaData, "Sunrise | Replica: No ReplicaData was found!");
-	local Replica = game:GetService("ServerScriptService").ProjectSunrise.Loader.Libraries.ProfileService;
-	local  class,tags, data , replication ,parent =  ReplicaData.ClassToken,ReplicaData.Tags, ReplicaData.Data ,ReplicaData.Replications,ReplicaData.Parent;
-	
-	--creates the replica
-	local replica = Replica.NewReplica({
-		ClassToken = Replica.NewClassToken(class),
-		Tags = tags, 
-		Data = data, 
-		Replication = replication, 
-		Parent = parent});
-	return replica
-end;
-
-function API:ChangeReplicaValue()
-	print(self.replica.Data)
-end;
-
-API.Replica.__index = API.Replica;
 
 --################ Profile Service ################--
 
@@ -114,9 +91,6 @@ end
 
 --################ CoreAPI ################--
 CoreAPI = setmetatable({
-	GetLibraryWithUtil = function(name)
-		return Util.Get(name);
-	end,
 	GetOtherLibrary = function(location, name)
 		return require(location:FindFirstChild(name))
 	end,
@@ -130,4 +104,5 @@ CoreAPI = setmetatable({
 
 rawset(_G, "SunriseCoreAPI", CoreAPI)
 return API
+
 
