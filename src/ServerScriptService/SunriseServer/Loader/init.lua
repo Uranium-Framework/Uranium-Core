@@ -29,26 +29,22 @@ return function(packages, settings)
     --//Expansion executor(Runs all the expansions and imports all the important things into the expansion)
     local function expansionExe(expansion)
         if expansion.Execute then
-            expansion.API = require(script.System.SunriseAPI)
+            expansion.API = require(script.System.SunriseAPI);
 
             --//Extension reader
-            for extension, value in pairs(require(script.Parent.Settings).extends) do
-                if game:GetService("ReplicatedStorage"):FindFirstChild("Packages", true):FindFirstChild(extension) then
-                    if value == true then
-                        for extensionIn, val in pairs(expansion.Extends) do
-                            if extension == extensionIn and val == true then
-                                expansion.Extends[extension] = require(game:GetService("ReplicatedStorage"):FindFirstChild("Packages", true):FindFirstChild(extension))
-                            end;
-                        end;
+            for extension, value in pairs(expansion.Extends) do
+                if game:GetService("ReplicatedStorage"):FindFirstChild(extension, true) then
+                    if value then
+                        expansion[extension] = require(game:GetService("ReplicatedStorage"):FindFirstChild(extension, true));
                     else
-                        warn(string.format("The extension %s", extension, "%s is inactive!"))
+                        warn("Sunrise: The extension "..extension.." is unactive please active it if you wish to use it!");
                     end;
                 else
-                    warn(string.format("There is no extension with the name %s", extension))
+                    warn("Sunrise: No package found with the name " .. extension);
                 end;
             end;
             --//End of the extension reader
-
+            expansion.Execute();
         end;
     end;
 
@@ -65,8 +61,6 @@ return function(packages, settings)
                 expansionExe(req)
             end;
         end)
-        :catch(function(err) error(err) end)
     end;
     execute();
 end;
-

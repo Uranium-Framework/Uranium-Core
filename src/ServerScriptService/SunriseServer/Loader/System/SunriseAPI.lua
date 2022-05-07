@@ -5,8 +5,6 @@ API.__index = API
 API.Replica = {} --All functions for Replica Service
 API.ProfileService = {} --All functions for Profile Service
 API.PathFinder = {} --All functions for Pathfinder
-API.Remote = require(script.Parent.Remote)
-local ScriptContext = game:GetService("ScriptContext")
 
 type Array<t> = {[number]:t} -- Array variable type
 type Dictionary<t> = {[string]:t} -- Dictionary variable type
@@ -16,10 +14,11 @@ type Dictionary<t> = {[string]:t} -- Dictionary variable type
 
 
 
+
 --################ Profile Service ################--
 
 API.ProfileService.StartData = function(data: {}, onLoaded, onRelease)
-	local ProfileService = CoreAPI.GetLibraryWithUtil("ProfileService")
+	local ProfileService = require(script.Parent.Parent.Libraries.ProfileService)
 	local Players = game:GetService("Players")
 
 	local ProfileStore = ProfileService.GetProfileStore(
@@ -104,5 +103,4 @@ CoreAPI = setmetatable({
 
 rawset(_G, "SunriseCoreAPI", CoreAPI)
 return API
-
 

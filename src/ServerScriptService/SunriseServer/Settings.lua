@@ -20,8 +20,5 @@ return {
 		
 	}; --Used to give permissions to manage the framework(Only give their user id and not the user!)
 
-	extends = {}; --Allows for the addition any extends
-
 	custom = {}; --This allows to make your own settings for expansions etc
 }
-

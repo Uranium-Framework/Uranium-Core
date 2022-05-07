@@ -1,7 +1,7 @@
-local HttpService = game:GetService("HttpService")
+local HttpService = game:GetService("HttpService");
 local Promise = require(game:GetService("ReplicatedStorage"):FindFirstChild("SunriseAssetHolder"):FindFirstChild("Libraries").Knit.Promise);
-local currentVer = "1.0.0-alpha.1"
-local currentBuild = "Luna"
+local currentVer = "1.0.0-alpha.1";
+local currentBuild = "Luna";
 
 local function fetch()
 	return Promise.new(function(resolve, reject)
@@ -20,14 +20,12 @@ if status then
 	for _, v in ipairs(response) do
 		if v.Version ~= currentVer or v.Build ~= currentBuild and v.Major then
 			warn("Sunrise: OUT OF DATE PLEASE UPDATE TO", v.Version, "BUILD", v.Build);
-			return false;
+			return v.Version;
 		else
 			warn("Sunrise: Loaded the version:", currentVer, "Build", currentBuild);
-			return true;
+			return currentVer;
 		end;
 	end;
 else
 	warn("Please turn on HTTP Service!");
 end;
-
-end
