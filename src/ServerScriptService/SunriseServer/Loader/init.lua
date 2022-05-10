@@ -44,6 +44,8 @@ return function(packages, settings)
                 end;
             end;
             --//End of the extension reader
+
+            --//Asset manager(Allows to access and use an automatically duplicate asset from the asset folder!)
             expansion.Execute();
         end;
     end;
