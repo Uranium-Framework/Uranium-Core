@@ -2,6 +2,18 @@ return function(packages, settings)
     --//Variables
     local promise = require(game:GetService("ReplicatedStorage"):FindFirstChild("SunriseAssetHolder"):FindFirstChild("Libraries").Knit.Promise);
    local packageInfo = {};
+
+   --//Finder
+   function find(tab, val)
+	local i = 1;
+	for k, v in pairs(tab) do
+		if k == val then
+			return i; 
+		end
+		i += 1;
+	end
+	return nil;
+end
    
    --//Version puller(Gets the current version of Sunrise)
     local function versionPull(resolve, reject)
@@ -18,37 +30,42 @@ return function(packages, settings)
         for _, v in pairs(packages) do
             local scriptName = v.name; 
             local required = require(v);
-            if table.find(packageInfo, scriptName) == nil then
+            if find(packageInfo, scriptName) == nil then
                 packageInfo[scriptName] = {required.Name, required.LoaderVersion}; 
             end;
-            return required.LoaderVersion, v, required;
+            return required.LoaderVersion;
         end;
     end;
 
 
     --//Expansion executor(Runs all the expansions and imports all the important things into the expansion)
-    local function expansionExe(expansion)
-        if expansion.Execute then
-            expansion.API = require(script.System.SunriseAPI);
+    local function expansionExe()
 
-            --//Extension reader
-            for extension, value in pairs(expansion.Extends) do
-                if game:GetService("ReplicatedStorage"):FindFirstChild(extension, true) then
-                    if value then
-                        expansion[extension] = require(game:GetService("ReplicatedStorage"):FindFirstChild(extension, true));
-                    else
-                        warn("Sunrise: The extension "..extension.." is unactive please active it if you wish to use it!");
-                    end;
-                else
-                    warn("Sunrise: No package found with the name " .. extension);
-                end;
-            end;
-            --//End of the extension reader
+		for _, v in pairs(packages) do
+            local expansion = require(v);
 
-            --//Asset manager(Allows to access and use an automatically duplicate asset from the asset folder!)
-            expansion.Execute();
-        end;
-    end;
+			if expansion.Execute then
+				expansion.API = require(script.System.ServerAPI);
+				expansion.API.Shared = require(game:GetService("ReplicatedStorage"):FindFirstChild("SunriseAssetHolder")['Built-In'].SharedAPI);
+
+				--//Extension reader
+				for import, value in pairs(expansion.Imports) do
+					if game:GetService("ReplicatedStorage"):FindFirstChild(import, true) then
+						if value then
+							expansion[import] = require(game:GetService("ReplicatedStorage"):FindFirstChild(import, true));
+						else
+							warn("Sunrise: The extension "..import.." is unactive please active it if you wish to use it!");
+						end;
+					else
+						warn("Sunrise: No package found with the name " .. import);
+					end;
+				end;
+				--//End of the extension reader
+
+				expansion.Execute();
+			end;
+		end;
+	end;
 
     --//Executioner(Runs all of the functions)
     function execute()
@@ -60,7 +77,7 @@ return function(packages, settings)
                 package.Parent = game:GetService("ReplicatedStorage"):FindFirstChild("AssetContainment", true);
                 warn("Sunrise: The expansion", package.name, "is outdated. Consider changing the expansions version to", arg1, "This expansion will be placed in AssetContainment!")
             else
-                expansionExe(req)
+                expansionExe()
             end;
         end)
     end;

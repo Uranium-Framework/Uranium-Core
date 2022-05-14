@@ -766,7 +766,7 @@ end
 	@return (iter: (t: table, k: any) -> (key: any?, values: table?), tbl: table, startIndex: any?)
 
 	Returns an iterator that can scan through multiple tables at the same time side-by-side, matching
-	against shared keys/indices.
+	against Client keys/indices.
 
 	```lua
 	local t1 = {10, 20, 30, 40, 50}
