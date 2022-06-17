@@ -1,0 +1,15 @@
+name: Bug Report
+description: This is used to report any bugs for us to fix (This will not cover 3rd party packages!)
+
+body:
+  - type: textarea
+    id: bug_info
+    attributes:
+      lables: What is the bug you are facing?
+      description: Explain what this bug causes very vaguely!
+      placeholder: >-
+        Example:
+
+        1. What API functions are used 
+       validations:
+      required: true
