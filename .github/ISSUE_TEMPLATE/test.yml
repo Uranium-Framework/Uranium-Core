@@ -30,3 +30,16 @@ body:
       label: Provide us the copy and paste of your code
       description: Please make sure you provide us a gist containing the copy and paste of your code
       placeholder: https://gist.github.com/<your_user>/<gist_id>
+    
+    validations:
+      required: true
+
+  - type: textarea
+    id: extras
+    attributes:
+      label: Anything else you wish to add?
+      description: If you wish to give anything else we might need to know please make sure you add it this will help us understand this issue better!\
+      placeholder: >-
+        Example: 
+
+        I have added .... to .... 
