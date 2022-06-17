@@ -5,11 +5,10 @@ title: '[Help Needed]: '
 body: 
   - type: textarea
     id: help_with
-     attributes:
+    attributes:
       label: What do you need help with?
       description: Here you can request any help you need if it is something to do with the core of Uranium, we are not responsible for any 3rd party packages, unless they are Uranium branded!
       placeholder: How do I ....
       value: "Test"
-    
     validations:
       required: true
