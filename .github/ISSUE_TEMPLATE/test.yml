@@ -1,18 +1,32 @@
 name: Bug report
 description: >-
-  Please use this template when you have encountered a bug in JEI.  
-  If the issue seems to affect only one mod, please report to them first instead of here.
+  Only use this when you are sure that there is a bug within Uranium framework  
 title: '[Bug]: '
 body:
   - type: textarea
-    id: repro_steps
+    id: bug_exp
     attributes:
-      label: Steps to Reproduce the Bug
-      description: Please explain what we need to do to cause the bug.
+      label: What is the bug you encountered
+      description: Explain what this bug is about and what you used to create this bug.
       placeholder: >-
         Example:  
-        
-        1. Hold Shift   
-        2. Click the anvil in the JEI ingredient list on the left side.
+
+        1. What API function you use
+        2. The error message you have recieved
     validations:
       required: true
+  - type: textarea
+    id: screen_shots
+    attributes:
+      label: Give us any neccessary screenshots
+      description: To be able to fully debug this please make sure you send us a screenshot of your code and errors etc
+      
+    validations:
+      required: true
+
+  - type: input
+    id: code
+    attributes:
+      label: Provide us the copy and paste of your code
+      description: Please make sure you provide us a gist containing the copy and paste of your code
+      placeholder: https://gist.github.com/<your_user>/<gist_id>
