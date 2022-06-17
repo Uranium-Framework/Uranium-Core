@@ -3,8 +3,8 @@ description: >-
   Here you can request help on anything to due with CORE Uranium (This will not cover 3rd party packages)
 title: '[Help Needed]: '
 body: 
-
   - type: markdown
+    id: info
     attributes: 
       label: Important Information
       value: | 
@@ -21,7 +21,6 @@ body:
         Example:
 
         How do I ....
-
     validations:
       required: true
     
@@ -31,7 +30,6 @@ body:
       label: Input your code here
       description: For us to be able to assist you better please include your code via a gist here
       placeholder: https://gist.github.com/<your_user>/<gist_id>
-
     validations:
       required: true
 
