@@ -3,12 +3,46 @@ description: >-
   Here you can request help on anything to due with CORE Uranium (This will not cover 3rd party packages)
 title: '[Help Needed]: '
 body: 
+
+  - type: markdown
+    attributes: 
+      label: Important Information
+      value: | 
+        Please *DO NOT* request any code snippets, 
+        
+        If you wish to know things like the API etc you can refer to our website.
+
   - type: textarea
     id: help_with
     attributes:
       label: What do you need help with?
       description: Here you can request any help you need if it is something to do with the core of Uranium, we are not responsible for any 3rd party packages, unless they are Uranium branded!
-      placeholder: How do I ....
-      value: "Test"
+      placeholder: >-
+        Example:
+
+        How do I ....
+
     validations:
       required: true
+    
+  - type: input
+    id: code
+    attributes: 
+      label: Input your code here
+      description: For us to be able to assist you better please include your code via a gist here
+      placeholder: https://gist.github.com/<your_user>/<gist_id>
+
+    validations:
+      required: true
+
+  - type: textarea
+    id: extras
+    attributes:
+      label: Anything extra?
+      description: If there is anything else we need to know please inform us now!
+      placeholder: >-
+        Examples: 
+
+        I have ....
+
+      
