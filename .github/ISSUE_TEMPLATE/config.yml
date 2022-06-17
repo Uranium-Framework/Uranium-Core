@@ -3,3 +3,6 @@ contact_links:
   - name: How to Uranium
     url: https://www.youtube.com/playlist?list=PLKGFv5F_wSIbWlhB16FPm3RuZ2apBC8e8
     about: Video series where you can learn all about Uranium
+  - name: Documentation
+    url: https://syntaldev.github.io/site/
+    about: Here you can find everything you need to know about Uranium and how to use it correctly
