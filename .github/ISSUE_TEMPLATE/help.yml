@@ -38,11 +38,10 @@ body:
   - type: textarea
     id: extras
     attributes:
-      label: Anything extra?
-      description: If there is anything else we need to know please inform us now!
+      label: Anything else you wish to add?
+      description: If you wish to give anything else we might need to know please make sure you add it this will help us understand this issue better!\
       placeholder: >-
-        Examples: 
+        Example: 
 
-        I have ....
-
+        I have added .... to .... 
       
