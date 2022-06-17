@@ -7,7 +7,7 @@ body:
     id: info
     attributes: 
       label: Important Information
-      value: | 
+      value: >-
         Please *DO NOT* request any code snippets, 
         
         If you wish to know things like the API etc you can refer to our website.
